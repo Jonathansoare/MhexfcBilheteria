@@ -1,0 +1,45 @@
+/* MOBILE FIRST */
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* 📱 Celular */
+@media (max-width: 480px) {
+  .container {
+    padding: 16px;
+  }
+
+  .ticket {
+    flex-direction: row;
+    gap: 5px;
+  }
+
+  .modal {
+    max-width: 100%;
+    border-radius: 16px;
+  }
+
+  .hero-img img {
+    height: 180px;
+    object-fit: cover;
+  }
+}
+
+/* 📱 Tablet */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  .ticket {
+    gap: 12px;
+  }
+}
+
+/* 💻 Desktop */
+@media (min-width: 769px) {
+  .container {
+    max-width: 520px;
+    margin: auto;
+  }
+}

@@ -1,0 +1,49 @@
+.ticket {
+  background-color:white;
+  border-radius: 16px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 12px;
+  transition: .2s;
+}
+
+.ticket-info strong { font-size: 14px; }
+.ticket-info span { font-size: 13px; color: #000; }
+.ticket-info small { font-size: 10px; color: #6b7280; }
+
+/* Counter */
+.counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;   /* 🔥 centraliza no eixo horizontal */
+  gap: 8px;
+}
+
+.counter button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  font-size: 18px;
+  line-height: 1;           /* 🔥 evita desalinhar o + e - */
+  display: flex;           /* 🔥 centraliza o símbolo */
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.counter button:hover {
+  background: #3b82f6;
+  color: #fff;
+  border-color: #3b82f6;
+}
+
+.counter span {
+  min-width: 20px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+}

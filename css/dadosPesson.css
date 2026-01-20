@@ -1,0 +1,94 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.card-pagamento {
+  background: #fff;
+  width: 100%;
+  max-width: 480px;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+  animation: fadeIn .3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.card-pagamento h2 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.status {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.status.aguardando {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.valor {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 12px 0 20px;
+}
+
+.qr-box {
+  background: #f1f5f9;
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+}
+
+.qr-box img {
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+}
+
+.info {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #475569;
+}
+
+.btn-voltar {
+  margin-top: 24px;
+  display: block;
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  background: #0f172a;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-voltar:hover {
+  background: #020617;
+}

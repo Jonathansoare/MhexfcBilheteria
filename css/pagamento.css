@@ -1,0 +1,58 @@
+.resumo-box {
+  background-color: #fff;
+  margin: 10px;
+  border-radius: 12px;
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;   /* dá definição sem “pesar” */
+}
+
+.resumo-titulo {
+  color: #111;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 6px;        /* respira melhor */
+}
+
+.resumo-item.total {
+  margin-top: 8px;
+  font-size: 16px;
+}
+
+.resumo-item {
+  color: #222;
+  font-size: 15px;
+  margin: 4px 0;
+}
+
+.resumo-item strong {
+  color: #000;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.resumo-lista {
+  list-style: none;
+  padding-left: 0;
+  margin: 4px 0 0;
+}
+
+.resumo-lista li {
+  font-size: 13px;
+  color: #333;
+  margin-left: 10px;
+}
+
+/* Badges, se usar */
+.resumo-badges {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.badge {
+  background: #f3f4f6;
+  color: #111827;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+}
