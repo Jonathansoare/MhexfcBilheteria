@@ -20,7 +20,7 @@
   height: 50px;
   width: 50px;
   padding-right: 10px;
-  border-right: 0.5px solid #000;
+  border-right: 0.5px solid #ddd;
 }
 .Logo-text {
   display: flex;
@@ -29,12 +29,12 @@
   padding-left: 10px;
 }
 .Logo-title {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: bold;
 }
 
 .Logo-text span {
-  font-size: 9px;
+  font-size: 10px;
   font-style: italic;
   margin-top: 1px;
 }

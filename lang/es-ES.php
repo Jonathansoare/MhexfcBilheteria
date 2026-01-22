@@ -21,6 +21,8 @@ return [
   'museum_location' => 'Fuerte de Copacabana – Río de Janeiro',
   'museum_hours' => 'De martes a domingo, de 10h a 19h',
   'museum_parking' => 'Estacionamiento exclusivo para militares',
+  'isencao_instagram' => 'Entrada gratuita para seguidores del perfil de Instagram los martes (excepto feriados).',
+
 
   'select_ticket' => 'Seleccione su entrada',
   'ticket_full' => 'Entrada Entera',
@@ -67,4 +69,24 @@ return [
   'phone_placeholder' => '(21) 99999-9999',
 
   'continue' => 'Continuar',
+
+  ## Términos de Aceptación
+  'termosTicket' => 'Términos de Aceptación',
+  'termo_intro' => 'Al continuar, declaro que conozco las normas de media entrada y exención:',
+  'termo_meia_title' => 'Media entrada (con comprobante):',
+  'termo_professores' => 'Profesores de la red pública de enseñanza;',
+  'termo_estudantes' => 'Estudiantes de instituciones públicas y privadas;',
+  'termo_maiores_60' => 'Personas mayores de 60 años;',
+  'termo_idjovem' => 'Portadores del ID Jovem.',
+  'termo_isento_title' => 'Exentos (con comprobante):',
+  'termo_militares_br' => 'Militares de las Fuerzas Armadas y Fuerzas Auxiliares de Brasil y sus dependientes;',
+  'termo_militares_ext' => 'Militares extranjeros uniformados;',
+  'termo_maiores_80' => 'Personas mayores de 80 años;',
+  'termo_pcd_meia' => 'Personas con discapacidad;',
+  'termo_menores_6' => 'Niños menores de 6 años;',
+  'termo_guias' => 'Guías de Turismo;',
+  'termo_aceite' => 'Declaro que he leído y acepto los términos anteriores.',
+  'cancel' => 'Cancelar',
+  'confirm' => 'Confirmar',
+
 ];

@@ -21,6 +21,8 @@ return [
   'museum_location' => 'Copacabana Fort – Rio de Janeiro',
   'museum_hours' => 'Tuesday to Sunday, from 10am to 7pm',
   'museum_parking' => 'Exclusive parking for military staff',
+  'isencao_instagram' => 'Free admission for Instagram followers on Tuesdays (except holidays).',
+
 
   'select_ticket' => 'Select your ticket',
   'ticket_full' => 'Full Ticket',
@@ -67,4 +69,24 @@ return [
   'phone_placeholder' => '(21) 99999-9999',
 
   'continue' => 'Continue',
+
+  ## Agreement Terms
+  'termosTicket' => 'Agreement Terms',
+  'termo_intro' => 'By proceeding, I declare that I am aware of the half-price and exemption rules:',
+  'termo_meia_title' => 'Half-price ticket (with proof):',
+  'termo_professores' => 'Public school teachers;',
+  'termo_estudantes' => 'Students from public and private schools;',
+  'termo_maiores_60' => 'People over 60 years old;',
+  'termo_idjovem' => 'ID Jovem holders.',
+  'termo_isento_title' => 'Exempt (with proof):',
+  'termo_militares_br' => 'Members of the Brazilian Armed Forces and Auxiliary Forces and their dependents;',
+  'termo_militares_ext' => 'Foreign military personnel in uniform;',
+  'termo_maiores_80' => 'People over 80 years old;',
+  'termo_pcd_meia' => 'People with disabilities;',
+  'termo_menores_6' => 'Children under 6 years old;',
+  'termo_guias' => 'Tour Guides;',
+  'termo_aceite' => 'I declare that I have read and agree with the terms above.',
+  'cancel' => 'Cancel',
+  'confirm' => 'Confirm',
+
 ];

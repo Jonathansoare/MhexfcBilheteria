@@ -1,0 +1,152 @@
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,42,0.6);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay.show {
+  display: flex;
+}
+
+.modal {
+  background: #fff;
+  max-width: 420px;
+  width: 92%;
+  max-height: 75vh;        /* 👈 Limita a altura da tela */
+  margin: 10px;
+  box-shadow: 0 20px 50px rgba(15,23,42,0.25);
+  padding: 16px;
+  text-align: center;
+  overflow-y: auto;       /* 👈 Scroll só se precisar */
+  border-radius: 16px;
+}
+
+
+/* ===== Conteúdo ===== */
+.modal-title{
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.modal-list-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.modal-list {
+  text-align: left; /* 👈 Texto continua alinhado à esquerda */
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.modal-list p {
+  font-size: 16px;
+}
+
+.modal-list ul {
+  padding-left: 16px;
+  margin: 4px 0;
+}
+
+.modal-list li {
+  list-style: disc;
+  margin-bottom: 1px;
+}
+
+/* Checkbox */
+.modal-list input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #3b82f6;
+  cursor: pointer;
+}
+
+.termo-aceite span {
+  margin-left: 8px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.termo-aceite {
+  display: flex;
+  align-items: center;
+}
+
+/* ===== Rodapé ===== */
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+.modal-cancel,
+.modal-confirm {
+  width: 48%;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+
+
+.modal-cancel {
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  width: 50%;
+}
+
+.modal-confirm {
+  border: none;
+  background: #0f172a;
+  color: #fff;
+  width: 50%;
+}
+
+.modal-confirm:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* ===== Responsivo ===== */
+
+/* Telas pequenas (celular) */
+@media (max-width: 480px) {
+  .modal {
+    height: 90%;
+  }
+
+  .modal-title {
+    font-size: 20px;
+  }
+
+  .modal-list {
+    font-size: 12.5px;
+  }
+
+  .modal-footer {
+    flex-direction: row;
+  }
+
+  .modal-cancel,
+  .modal-confirm {
+    width: 50%;
+  }
+}
+
+/* Tablets */
+@media (min-width: 481px) and (max-width: 768px) {
+  .modal {
+    height: 88%;
+  }
+}
