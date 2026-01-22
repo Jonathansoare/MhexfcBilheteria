@@ -1,8 +1,7 @@
 <?php
 session_start();
 require __DIR__ . '/../helpers/i18n.php';
-include __DIR__ . '/../components/Header/Header.php';
-require '../config.php';
+require __DIR__ . '/../config.php';
 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -11,7 +10,7 @@ error_reporting(E_ALL);
 $quantities  = is_array($_POST['quantities'] ?? null) ? $_POST['quantities'] : [];
 $validadeKey = $_POST['validade'] ?? 'hoje';
 
-// === Labels e preços (DEVEM bater com Ticket.php) ===
+// === Labels e preços ===
 $labels = [
   'inteira' => 'Ingresso Inteiro',
   'meia'    => 'Meia-entrada',
@@ -52,8 +51,10 @@ $validade = match ($validadeKey) {
   <title><?= t('payment_summary') ?></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- CSS -->
   <link rel="stylesheet" href="<?= APP_URL ?>/css/pagamento.css">
   <link rel="stylesheet" href="<?= APP_URL ?>/components/VisitanteForm/VisitanteForm.css">
+  <link rel="stylesheet" href="<?= APP_URL ?>/components/Header/Header.css">
 </head>
 <body>
 
@@ -92,8 +93,10 @@ $validade = match ($validadeKey) {
 
 </div>
 
+<!-- JS -->
 <script src="<?= APP_URL ?>/components/VisitanteForm/VisitanteForm.js"></script>
 <script src="<?= APP_URL ?>/js/pagamento.js"></script>
+<script src="<?= APP_URL ?>/components/Header/Header.js"></script>
 
 </body>
 </html>

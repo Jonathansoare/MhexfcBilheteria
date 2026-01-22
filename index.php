@@ -13,6 +13,9 @@ $_SESSION['lang'] ?? 'SEM SESSÃO'
   <!-- CSS globais -->
   <link rel="stylesheet" href="<?= $baseUrl ?>/css/Home.css">
   <link rel="stylesheet" href="<?= $baseUrl ?>/css/modal.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="<?= $baseUrl ?>/css/pagamento.css">
   <link rel="stylesheet" href="<?= $baseUrl ?>/components/Ticket/Ticket.css">
   <link rel="stylesheet" href="<?= $baseUrl ?>/components/ModalConfirmacao/ModalConfirmacao.css">

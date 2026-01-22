@@ -1,64 +1,78 @@
-form#formVisitante {
-    padding: 10px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 5px;
-    font-family: 'Inter', sans-serif;
-    margin-top: 20px;
-
+/* Container do formulário */
+.form-visitante-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-form#formVisitante h2{
-    font-size: 20px;
-    font-family: 'Inter', sans-serif;
-    font-weight: bold;
-    text-transform: uppercase;
-
+/* Formulário */
+#formVisitante {
+  padding: 12px;
+  background: #ffffff !important;
+  border-radius: 14px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.10);
+  margin: 10px 5px;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  justify-content: center;
 }
 
-input {
-    width: 100%;
-    height: 35px;
-    margin-bottom: 20px;
-    border-radius: 20px;
-    padding-left: 10px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    font-family: 'Inter', sans-serif;
-    letter-spacing: 1px;
+/* Título */
+#formVisitante h2 {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  text-align: center;
 }
 
- select{
-    width: 100%;
-    height: 35px;
-    margin-bottom: 10px;
-    border-radius: 20px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    font-family: 'Inter', sans-serif;
-    letter-spacing: 1px;
- }
+/* Inputs e Select */
+#formVisitante input,
+#formVisitante select {
+  width: 96%;
+  height: 40px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+  padding-left: 5px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: .5px;
+}
 
-input:focus, select:focus {
+/* Focus */
+#formVisitante input:focus,
+#formVisitante select:focus {
   border-color: #007BFF;
   outline: none;
-   font-family: 'Inter', sans-serif;
 }
 
-button {
+/* Botão */
+#formVisitante button {
   width: 100%;
   height: 50px;
-  border-radius: 10px;
+  border-radius: 15px;
   border: none;
   background: #007BFF;
-  color: white;
+  color: #ffffff;
   font-weight: bold;
+  font-size: 14px;
   cursor: pointer;
-  transition: background 0.3s;
-   font-family: 'Inter', sans-serif;
+  transition: background .3s, transform .15s;
 }
 
-button:hover {
+/* Hover botão */
+#formVisitante button:hover {
   background: #0056b3;
+  transform: translateY(-1px);
+}
+
+/* Mobile ajuste */
+@media (max-width: 600px) {
+  #formVisitante {
+    width: 90%;
+  }
 }

@@ -1,58 +1,52 @@
-.resumo-box {
-  background-color: #fff;
-  margin: 10px;
-  border-radius: 12px;
-  padding: 10px 12px;
-  border: 1px solid #e5e7eb;   /* dá definição sem “pesar” */
-}
-
-.resumo-titulo {
-  color: #111;
-  font-size: 22px;
-  font-weight: 600;
-  margin-bottom: 6px;        /* respira melhor */
-}
-
-.resumo-item.total {
-  margin-top: 8px;
-  font-size: 16px;
-}
-
-.resumo-item {
-  color: #222;
-  font-size: 15px;
-  margin: 4px 0;
-}
-
-.resumo-item strong {
-  color: #000;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.resumo-lista {
-  list-style: none;
-  padding-left: 0;
-  margin: 4px 0 0;
-}
-
-.resumo-lista li {
-  font-size: 13px;
-  color: #333;
-  margin-left: 10px;
-}
-
-/* Badges, se usar */
-.resumo-badges {
+.pagamento-container {
+  min-height: calc(100vh - 71px);
   display: flex;
-  gap: 4px;
-  margin-top: 4px;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  box-sizing: border-box;
+  background: #f9fafb;
 }
 
-.badge {
-  background: #f3f4f6;
-  color: #111827;
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 0.8rem;
+/* ===== Resumo ===== */
+.pagamento-container .resumo-box {
+  background: #ffffff;
+  width: 40%;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.15);
+}
+
+.pagamento-container .resumo-titulo {
+  text-align: center;
+  margin-bottom: 12px;
+  font-size: 20px;
+  font-family: "Roboto", sans-serif;
+}
+
+.pagamento-container .resumo-item {
+  margin: 6px 0;
+    font-family: "Roboto", sans-serif;
+}
+
+.pagamento-container .resumo-lista {
+  padding-left: 16px;
+  margin: 6px 0;
+    font-family: "Roboto", sans-serif;
+}
+
+.pagamento-container .resumo-item.total {
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 10px;
+    font-family: "Roboto", sans-serif;
+}
+
+/* Mobile ajuste */
+@media (max-width: 480px) {
+  .pagamento-container .resumo-box  {
+    padding-bottom: 40px;
+    width: 90%;
+  }
 }
