@@ -10,6 +10,12 @@ return [
   'valid_7_days' => 'Valid for 7 days from today',
   'total_to_pay' => 'Total to pay',
 
+  ### Header Logo
+  'logo_alt'      => 'Logo of the Army Historical Museum and Copacabana Fort',
+  'logo_title'    => 'Army Historical Museum and Copacabana Fort',
+  'logo_subtitle' => 'Fort! Culture, Memory and Tradition!',
+
+
   'museum_title' => 'Army Historical Museum',
   'museum_subtitle' => 'Discover the history of the Brazilian Army.',
   'museum_location' => 'Copacabana Fort – Rio de Janeiro',

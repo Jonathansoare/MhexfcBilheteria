@@ -11,6 +11,11 @@ return [
   'valid_7_days'      => 'Válido por 7 dias a partir de hoje',
   'total_to_pay'      => 'Total a pagar',
 
+  ### Header Logo
+  'logo_alt'      => 'Logo do Museu Histórico do Exército e Forte de Copacabana',
+  'logo_title'    => 'Museu Histórico do Exército e Forte de Copacabana',
+  'logo_subtitle' => 'Forte! Cultura, Memória e Tradição!',
+
   ### Tela Inicial
   'museum_title' => 'Museu Histórico do Exército',
   'museum_subtitle' => 'Conheça a história do Exército Brasileiro.',

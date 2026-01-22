@@ -10,6 +10,12 @@ return [
   'valid_7_days' => 'Válido por 7 días desde hoy',
   'total_to_pay' => 'Total a pagar',
 
+  ### Header Logo
+  'logo_alt'      => 'Logo del Museo Histórico del Ejército y Fuerte de Copacabana',
+  'logo_title'    => 'Museo Histórico del Ejército y Fuerte de Copacabana',
+  'logo_subtitle' => '¡Fuerte! Cultura, Memoria y Tradición!',
+
+
   'museum_title' => 'Museo Histórico del Ejército',
   'museum_subtitle' => 'Conozca la historia del Ejército Brasileño.',
   'museum_location' => 'Fuerte de Copacabana – Río de Janeiro',

@@ -17,7 +17,13 @@ $atual = $idiomas[$lang] ?? $idiomas['pt-BR'];
 <link rel="stylesheet" href="<?= APP_URL ?>/components/Header/Header.css">
 
 <header class="topo">
-  <img src="<?= APP_URL ?>/assets/img/LogoFigma.png" class="logo" alt="Museu">
+  <div class="logo">
+      <img src="<?= APP_URL ?>/assets/img/MHEXFC0.png" class="logo" alt="Museu">
+      <div class="Logo-text">
+        <div class="Logo-title">Museu Histórico do Exército e Forte de Copacabana</div>
+        <span>Forte! Cultura, Memória e Tradição!</span>
+      </div>
+  </div>
 
   <div class="lang-container">
     <button class="lang-btn" id="langBtn" type="button">
