@@ -1,8 +1,6 @@
 <?php
-session_start();
-require __DIR__.'/../helpers/i18n.php';
 require_once __DIR__ . '/../config.php';
-
+require_once __DIR__ . '/../helpers/i18n.php';
 
 // Tickets disponíveis
 $tickets = [
@@ -20,7 +18,13 @@ $tickets = [
 ];
 ?>
 
-<?php include __DIR__.'/../components/Header/Header.php'; ?>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title><?= t('museum_title') ?></title>
+</head>
+<body>
 
 <section class="hero-img">
   <img src="/bilheteria/assets/img/05PORTICOFHD.jpg" alt="<?= t('hero_alt') ?>">
@@ -49,22 +53,20 @@ $tickets = [
 
   <form method="POST" action="/bilheteria/screens/Pagamento.php" id="form">
 
-    <?php 
-      foreach ($tickets as $id => $ticket):
-        $label = $ticket['label'];
-        $price = $ticket['price'];
-        $description = $ticket['description'] ?? '';
-        include __DIR__.'/../components/Ticket/Ticket.php';
-      endforeach;
-    ?>
+    <?php foreach ($tickets as $id => $ticket):
+      $label = $ticket['label'];
+      $price = $ticket['price'];
+      $description = $ticket['description'] ?? '';
+      include __DIR__.'/../components/Ticket/Ticket.php';
+    endforeach; ?>
 
     <span class="infor-beneficios"><?= t('law_benefits') ?></span>
 
     <h3><?= t('ticket_validity') ?></h3>
     <div class="validade">
-        <button type="button" class="active" onclick="setValidade('hoje',this)"><?= t('today') ?></button>
-        <button type="button" onclick="setValidade('3dias',this)"><?= t('three_days') ?></button>
-        <button type="button" onclick="setValidade('7dias',this)"><?= t('seven_days') ?></button>
+      <button type="button" class="active" onclick="setValidade('hoje',this)"><?= t('today') ?></button>
+      <button type="button" onclick="setValidade('3dias',this)"><?= t('three_days') ?></button>
+      <button type="button" onclick="setValidade('7dias',this)"><?= t('seven_days') ?></button>
     </div>
 
     <input type="hidden" name="validade" id="validade" value="hoje">
@@ -89,3 +91,6 @@ $modalId = 'modalHome';
 $onConfirm = "confirmarPagamento()";
 include __DIR__.'/../components/ModalConfirmacao/ModalConfirmacao.php';
 ?>
+
+</body>
+</html>

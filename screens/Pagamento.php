@@ -1,6 +1,7 @@
 <?php
 session_start();
 require __DIR__ . '/../helpers/i18n.php';
+include __DIR__ . '/../components/Header/Header.php';
 require '../config.php';
 
 ini_set('display_errors', 1);

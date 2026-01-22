@@ -1,8 +1,17 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 // Ambiente
 define('APP_NAME', 'Bilheteria Museu');
 define('APP_ENV', 'local'); // local | prod
-define('APP_URL', 'http://172.20.10.6/bilheteria');
+
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+$host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+$basePath = '/bilheteria'; // nome da pasta no htdocs
+
+define('APP_URL', $protocol . '://' . $host . $basePath);
 
 // Timezone
 date_default_timezone_set('America/Sao_Paulo');
@@ -18,8 +27,7 @@ define('BASE_PATH', __DIR__);
 define('PUBLIC_PATH', BASE_PATH . '/public');
 define('COMPONENTS_PATH', BASE_PATH . '/components');
 define('ASSETS_PATH', APP_URL . '/assets');
-$baseUrl = '/bilheteria'; // se estiver no htdocs/bilheteria
-
+$baseUrl = $basePath; // usado em links CSS/JS
 
 // Segurança
 define('CSRF_TOKEN_NAME', 'csrf_token');
@@ -28,14 +36,11 @@ define('SESSION_NAME', 'bilheteria_session');
 // Paginação / limites
 define('MAX_TICKETS_PER_ORDER', 10);
 
-// Pagamento (exemplo futuro)
-define('PAGAMENTO_PROVIDER', 'PagTesouro');
-
 // Debug
 define('DEBUG', true);
 if (DEBUG) {
-  ini_set('display_errors', 1);
-  error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
 } else {
-  ini_set('display_errors', 0);
+    ini_set('display_errors', 0);
 }
