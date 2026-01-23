@@ -1,4 +1,3 @@
-
 function abrirModal() {
   const modal = document.getElementById('termosTicketModal');
   if (modal) modal.classList.add('show');
@@ -6,25 +5,40 @@ function abrirModal() {
 
 function fecharModal(id) {
   const modal = document.getElementById(id);
-  if (modal) modal.classList.remove('.overlay.show ');
+  if (modal) modal.classList.remove('show');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   const checkbox = document.getElementById('aceiteTermos');
-  const btn = document.getElementById('btnConfirmar');
+  const btnConfirmar = document.getElementById('btnConfirmar');
+  const btnCancelar = document.getElementById('btnCancelar');
+  const modal = document.getElementById('termosTicketModal');
 
-  if (checkbox && btn) {
+  // Habilita botão Confirmar só se aceitar os termos
+  if (checkbox && btnConfirmar) {
     checkbox.addEventListener('change', () => {
-      btn.disabled = !checkbox.checked;
+      btnConfirmar.disabled = !checkbox.checked;
+    });
+  }
+
+  // Botão Cancelar fecha o modal
+  if (btnCancelar && modal) {
+    btnCancelar.addEventListener('click', () => {
+      modal.classList.remove('show');
     });
   }
 });
 
-function cancelarTermos() {
-  const btn = document.getElementById('btnCancelar');
-  const modal = document.getElementById('termosTicketModal');
+function enviarParaDadosPesson() {
+  const form = document.getElementById('form'); // MESMO ID do seu form antigo
 
-  btn.addEventListener('click', () => {
-    modal.classList.remove('show');
-  });
+  if (!form) {
+    console.error('Form não encontrado');
+    return;
+  }
+
+  form.action = '/bilheteria/screens/dadosPesson.php';
+  form.method = 'POST';
+  form.submit();
 }
+

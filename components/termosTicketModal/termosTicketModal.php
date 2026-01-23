@@ -31,14 +31,15 @@
     </div>
 
     <div class="modal-footer">
-      <button type="button" class="modal-cancel" id="btnCancelar" onclick="cancelarTermos()">
+      <button type="button" class="modal-cancel" id="btnCancelar">
         <?= t('cancel') ?>
       </button>
-      <button type="button" class="modal-confirm" id="btnConfirmar" disabled onclick="enviarParaPagamento()">
+      <button type="button" class="modal-confirm" id="btnConfirmar" disabled onclick="enviarParaDadosPesson()">
         <?= t('confirm') ?>
       </button>
 
 
     </div>
   </div>
+  <script src="<?= APP_URL ?>/components/termosTicketModal/termosTicketModal.js"></script>
 </div>

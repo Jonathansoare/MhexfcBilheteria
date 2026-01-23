@@ -11,14 +11,14 @@
 }
 
 .logo {
-  width: 100%;
+  width: 90%;
   height: auto;
   display: flex;
   flex-direction: row;
 }
 .logo img {
   height: 50px;
-  width: 50px;
+  width: 45px;
   padding-right: 10px;
   border-right: 0.5px solid #ddd;
 }
@@ -29,14 +29,15 @@
   padding-left: 10px;
 }
 .Logo-title {
-  font-size: 12px;
+  font-size: 16px;
   font-weight: bold;
+  font-family: "Roboto", sans-serif;
 }
 
 .Logo-text span {
-  font-size: 10px;
-  font-style: italic;
+  font-size: 12px;
   margin-top: 1px;
+  font-family: "Roboto", sans-serif;
 }
 
 .lang-container { position: relative; }

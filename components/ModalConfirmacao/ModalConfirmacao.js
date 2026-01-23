@@ -58,7 +58,7 @@ function confirmarPagamento() {
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({ ingressos, validade, total })
   }).then(() => {
-    window.location.href = '/bilheteria/screens/Pagamento.php';
+    window.location.href = '/bilheteria/screens/dadosPesson.php';
   });
 }
 
@@ -84,7 +84,7 @@ function enviarParaPagamento() {
   // Quantidades já estão no form: quantities[...]
 
   // Envia o form
-  form.action = '/bilheteria/screens/Pagamento.php';
+  form.action = '/bilheteria/screens/dadosPesson.php';
   form.method = 'POST';
   form.submit();
 }

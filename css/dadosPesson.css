@@ -1,94 +1,64 @@
-* {
-  box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
-}
-
-body {
-  margin: 0;
-  background: #f8fafc;
-  color: #0f172a;
-}
-
-.page {
-  min-height: 100vh;
+.pagamento-container {
+  min-height: calc(100vh - 71px);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 24px;
+  box-sizing: border-box;
+  background: #f9fafb;
 }
 
-.card-pagamento {
-  background: #fff;
-  width: 100%;
-  max-width: 480px;
-  border-radius: 20px;
-  padding: 28px;
-  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
-  animation: fadeIn .3s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.card-pagamento h2 {
-  font-size: 20px;
-  margin-bottom: 8px;
-}
-
-.status {
-  display: inline-block;
-  padding: 6px 12px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
-  margin-bottom: 16px;
-}
-
-.status.aguardando {
-  background: #fef3c7;
-  color: #92400e;
-}
-
-.valor {
-  font-size: 28px;
-  font-weight: 700;
-  margin: 12px 0 20px;
-}
-
-.qr-box {
-  background: #f1f5f9;
+/* ===== Resumo ===== */
+.pagamento-container .resumo-box {
+  background: #ffffff;
+  width: 40%;
   border-radius: 16px;
-  padding: 20px;
-  text-align: center;
-}
-
-.qr-box img {
-  width: 220px;
-  height: 220px;
-  object-fit: contain;
-}
-
-.info {
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.15);
   margin-top: 20px;
-  font-size: 14px;
-  color: #475569;
 }
 
-.btn-voltar {
-  margin-top: 24px;
-  display: block;
-  width: 100%;
-  padding: 14px;
-  border-radius: 14px;
-  border: none;
-  background: #0f172a;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
+.pagamento-container .resumo-titulo {
+  text-align: center;
+  margin-bottom: 12px;
+  font-size: 20px;
+  font-family: "Roboto", sans-serif;
 }
 
-.btn-voltar:hover {
-  background: #020617;
+.pagamento-container .resumo-item {
+  margin: 6px 0;
+    font-family: "Roboto", sans-serif;
+}
+
+.pagamento-container .resumo-lista {
+  padding-left: 16px;
+  margin: 6px 0;
+  font-family: "Roboto", sans-serif;
+
+}
+
+.resumo-item li{
+  width: 50%;
+  margin-left: 15px;
+}
+
+
+.pagamento-container{
+  font-size: 18px;
+  margin-top: 10px;
+  font-family: "Roboto", sans-serif;
+}
+
+.resumo-item.total strong{
+  font-size: 20px;
+  margin-top: 10px;
+  font-family: "Roboto", sans-serif;
+}
+
+/* Mobile ajuste */
+@media (max-width: 480px) {
+  .pagamento-container .resumo-box  {
+    padding-bottom: 40px;
+    width: 90%;
+  }
 }

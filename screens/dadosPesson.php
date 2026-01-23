@@ -52,7 +52,7 @@ $validade = match ($validadeKey) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="<?= APP_URL ?>/css/pagamento.css">
+  <link rel="stylesheet" href="<?= APP_URL ?>/css/dadosPesson.css">
   <link rel="stylesheet" href="<?= APP_URL ?>/components/VisitanteForm/VisitanteForm.css">
   <link rel="stylesheet" href="<?= APP_URL ?>/components/Header/Header.css">
 </head>
@@ -73,7 +73,7 @@ $validade = match ($validadeKey) {
           <li><?= t('no_tickets') ?></li>
         <?php else: ?>
           <?php foreach ($ingressos as $i): ?>
-            <li>• <?= htmlspecialchars($i) ?></li>
+            <li><?= htmlspecialchars($i) ?></li>
           <?php endforeach; ?>
         <?php endif; ?>
       </ul>
