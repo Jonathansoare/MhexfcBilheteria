@@ -1,6 +1,8 @@
 .topo {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
   z-index: 9999;
   background: rgba(255,255,255,.95);
   height: 55px;
@@ -8,62 +10,70 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 10px;
+  box-sizing: border-box;
 }
 
+/* Logo */
 .logo {
-  width: 90%;
-  height: auto;
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  gap: 10px;
 }
+
 .logo img {
-  height: 50px;
-  width: 45px;
+  height: 40px;
+  width: auto;
   padding-right: 10px;
-  border-right: 0.5px solid #ddd;
+  border-right: 1px solid #ddd;
 }
+
 .Logo-text {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-left: 10px;
 }
+
 .Logo-title {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: bold;
   font-family: "Roboto", sans-serif;
 }
 
 .Logo-text span {
-  font-size: 12px;
-  margin-top: 1px;
+  font-size: 11px;
+  margin-top: 2px;
   font-family: "Roboto", sans-serif;
 }
 
-.lang-container { position: relative; }
+/* Idioma */
+.lang-container {
+  position: relative;
+}
 
 .lang-btn {
   background: #fff;
-  padding: 8px 14px;
-  border-radius: 14px;
-  border: none;
+  padding: 6px 10px;
+  border-radius: 12px;
+  border: 1px solid #d9d9d9;
   display: flex;
   align-items: center;
   gap: 6px;
   cursor: pointer;
-  border: 0.1px solid #d9d9d9;
 }
 
-.lang-btn img { width: 20px; }
+.lang-btn img {
+  width: 18px;
+}
 
+/* Dropdown */
 .lang-dropdown {
   position: absolute;
-  top: calc(100% + 8px);
+  top: calc(100% + 6px);
   right: 0;
   background: #fff;
-  border-radius: 12px;
+  border-radius: 10px;
   box-shadow: 0 6px 20px rgba(0,0,0,.2);
-  min-width: 160px;
+  min-width: 140px;
   padding: 6px;
   display: none;
 }
@@ -74,8 +84,9 @@
 
 .lang-item {
   display: flex;
-  gap: 10px;
-  padding: 8px 12px;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
   cursor: pointer;
 }
 
@@ -84,5 +95,34 @@
 }
 
 .lang-item img {
-  width: 18px;
+  width: 16px;
+}
+
+/* 📱 Mobile */
+@media (max-width: 480px) {
+  .topo {
+    height: 50px;
+    padding: 0 8px;
+  }
+
+  .logo img {
+    height: 34px;
+    padding-right: 8px;
+  }
+
+  .Logo-title {
+    font-size: 13px;
+  }
+
+  .Logo-text span {
+    font-size: 10px;
+  }
+
+  .lang-btn {
+    padding: 4px 8px;
+  }
+
+  .lang-btn img {
+    width: 16px;
+  }
 }

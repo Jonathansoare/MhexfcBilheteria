@@ -1,6 +1,12 @@
 <?php
 return [
 
+  ## header
+  'header_title' => 'Museo Histórico del Ejército y Fuerte de Copacabana',
+  'header_subtitle' => '¡Fuerza, Cultura, Memoria y Tradición!',
+
+
+
   'payment_summary' => 'Resumen del Pago',
   'tickets' => 'Entradas',
   'no_tickets' => 'Ninguna entrada seleccionada',
@@ -89,4 +95,20 @@ return [
   'cancel' => 'Cancelar',
   'confirm' => 'Confirmar',
 
+  ## pagamento
+  'payment_title' => 'Pago',
+  'choose_payment_method' => 'Elige un método de pago',
+
+  'pix_waiting' => 'Esperando pago vía PIX',
+  'pix_time_left' => 'Tiempo restante',
+  'pix_copy' => 'Copiar código PIX',
+  'pix_expired' => 'Tiempo agotado.',
+  'pix_new_payment' => 'Genera un nuevo pago.',
+
+  'card' => 'Tarjeta',
+  'card_name' => 'Nombre en la tarjeta',
+  'card_number' => 'Número de tarjeta',
+  'card_exp' => 'Vencimiento (MM/AA)',
+  'card_cvv' => 'CVV',
+  'pay_now' => 'Pagar ahora'
 ];

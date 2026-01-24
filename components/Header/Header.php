@@ -3,6 +3,8 @@ if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
 
+require_once __DIR__ . '/../../helpers/i18n.php';
+
 $lang = $_SESSION['lang'] ?? 'pt-BR';
 
 $idiomas = [
@@ -20,8 +22,8 @@ $atual = $idiomas[$lang] ?? $idiomas['pt-BR'];
   <div class="logo">
       <img src="<?= APP_URL ?>/assets/img/MHEXFC0.png" class="logo" alt="Museu">
       <div class="Logo-text">
-        <div class="Logo-title">Museu Histórico do Exército e Forte de Copacabana</div>
-        <span>Forte! Cultura, Memória e Tradição!</span>
+        <div class="Logo-title"><?= t('header_title') ?></div>
+        <span><?= t('header_subtitle') ?></span>
       </div>
   </div>
 
@@ -46,4 +48,4 @@ $atual = $idiomas[$lang] ?? $idiomas['pt-BR'];
   </div>
 </header>
 
-<script src="./Header.js" defer></script>
+<script src="/components/Header/Header.js" defer></script>

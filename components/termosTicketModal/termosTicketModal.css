@@ -1,3 +1,4 @@
+/* ===== Overlay ===== */
 .overlay {
   display: none;
   position: fixed;
@@ -13,58 +14,65 @@
   display: flex;
 }
 
+/* ===== Modal ===== */
 .modal {
   background: #fff;
   max-width: 420px;
   width: 92%;
-  max-height: 75vh;        /* 👈 Limita a altura da tela */
+  max-height: 80vh;
   margin: 10px;
   box-shadow: 0 20px 50px rgba(15,23,42,0.25);
-  padding: 16px;
-  text-align: center;
-  overflow-y: auto;       /* 👈 Scroll só se precisar */
-  border-radius: 16px;
+  padding: 14px 12px;
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
 }
 
-
-/* ===== Conteúdo ===== */
-.modal-title{
-  font-size: 26px;
+/* ===== Títulos ===== */
+.modal-title {
+  font-size: 20px;
   font-weight: 700;
+  margin-bottom: 6px;
 }
 
 .modal-list-title {
   font-size: 16px;
   font-weight: 600;
+  margin-top: 8px;
 }
 
+/* ===== Conteúdo (com scroll) ===== */
 .modal-list {
-  text-align: left; /* 👈 Texto continua alinhado à esquerda */
-}
-
-.modal-footer {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  margin-top: 16px;
+  flex: 1;
+  overflow-y: auto;
+  text-align: left;
+  margin: 8px 0;
 }
 
 .modal-list p {
-  font-size: 16px;
+  font-size: 14px;
+  margin-bottom: 6px;
 }
 
 .modal-list ul {
   padding-left: 16px;
-  margin: 4px 0;
+  font-size: 14px;
 }
 
 .modal-list li {
   list-style: disc;
-  margin-bottom: 1px;
+  margin-bottom: 4px;
 }
 
-/* Checkbox */
-.modal-list input[type="checkbox"] {
+/* ===== Checkbox ===== */
+.termo-aceite {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.termo-aceite input[type="checkbox"] {
   width: 20px;
   height: 20px;
   accent-color: #3b82f6;
@@ -77,39 +85,33 @@
   cursor: pointer;
 }
 
-.termo-aceite {
-  display: flex;
-  align-items: center;
-}
-
 /* ===== Rodapé ===== */
 .modal-footer {
   display: flex;
   justify-content: space-between;
   gap: 10px;
+  flex-shrink: 0;
+  margin-top: 8px;
 }
+
 .modal-cancel,
 .modal-confirm {
-  width: 48%;
+  width: 50%;
   padding: 12px;
   border-radius: 12px;
   font-size: 14px;
   cursor: pointer;
 }
 
-
-
 .modal-cancel {
   border: 1px solid #e5e7eb;
   background: #fff;
-  width: 50%;
 }
 
 .modal-confirm {
   border: none;
   background: #0f172a;
   color: #fff;
-  width: 50%;
 }
 
 .modal-confirm:disabled {
@@ -120,33 +122,36 @@
 
 /* ===== Responsivo ===== */
 
-/* Telas pequenas (celular) */
+/* Celular */
 @media (max-width: 480px) {
   .modal {
-    height: 90%;
+    max-height: 90vh;
+    padding: 12px 10px;
   }
 
   .modal-title {
-    font-size: 20px;
+    font-size: 18px;
   }
 
-  .modal-list {
-    font-size: 12.5px;
+  .modal-list p,
+  .modal-list li {
+    font-size: 13px;
   }
 
   .modal-footer {
-    flex-direction: row;
+    gap: 8px;
   }
 
   .modal-cancel,
   .modal-confirm {
-    width: 50%;
+    font-size: 13px;
+    padding: 10px;
   }
 }
 
-/* Tablets */
+/* Tablet */
 @media (min-width: 481px) and (max-width: 768px) {
   .modal {
-    height: 88%;
+    max-height: 88vh;
   }
 }

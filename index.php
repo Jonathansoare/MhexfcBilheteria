@@ -13,6 +13,7 @@ $_SESSION['lang'] ?? 'SEM SESSÃO'
   <!-- CSS globais -->
   <link rel="stylesheet" href="<?= $baseUrl ?>/css/Home.css">
   <link rel="stylesheet" href="<?= $baseUrl ?>/css/modal.css">
+  <link rel="stylesheet" href="<?= $baseUrl ?>/css/pagamento.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -35,4 +36,5 @@ $_SESSION['lang'] ?? 'SEM SESSÃO'
 <script src="<?= $baseUrl ?>/components/termosTicketModal/termosTicketModal.js" defer></script>
 <script src="<?= $baseUrl ?>/components/VisitanteForm/VisitanteForm.js" defer></script>
 <script src="<?= $baseUrl ?>/components/Header/Header.js" defer></script>
+<script src="<?= $baseUrl ?>/js/pagamento.js" defer></script>
 </html>

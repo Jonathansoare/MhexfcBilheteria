@@ -1,6 +1,11 @@
 <?php
 return [
 
+  ## header
+  'header_title' => 'Army Historical Museum and Copacabana Fort',
+  'header_subtitle' => 'Strength, Culture, Memory and Tradition!',
+
+
   'payment_summary' => 'Payment Summary',
   'tickets' => 'Tickets',
   'no_tickets' => 'No tickets selected',
@@ -89,4 +94,20 @@ return [
   'cancel' => 'Cancel',
   'confirm' => 'Confirm',
 
+  ## payment
+  'payment_title' => 'Payment',
+  'choose_payment_method' => 'Choose a payment method',
+
+  'pix_waiting' => 'Waiting for PIX payment',
+  'pix_time_left' => 'Time left',
+  'pix_copy' => 'Copy PIX code',
+  'pix_expired' => 'Time expired.',
+  'pix_new_payment' => 'Generate a new payment.',
+
+  'card' => 'Card',
+  'card_name' => 'Name on card',
+  'card_number' => 'Card number',
+  'card_exp' => 'Expiration (MM/YY)',
+  'card_cvv' => 'CVV',
+  'pay_now' => 'Pay now'
 ];

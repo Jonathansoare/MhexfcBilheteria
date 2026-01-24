@@ -95,7 +95,7 @@ $validade = match ($validadeKey) {
 
 <!-- JS -->
 <script src="<?= APP_URL ?>/components/VisitanteForm/VisitanteForm.js"></script>
-<script src="<?= APP_URL ?>/js/pagamento.js"></script>
+<script src="<?= APP_URL ?>/js/dadosPesson.js"></script>
 <script src="<?= APP_URL ?>/components/Header/Header.js"></script>
 
 </body>

@@ -1,55 +1,107 @@
- // Alterna visibilidade entre CPF e Passaporte
-  function trocarDocumento() {
-    const tipo = document.getElementById('tipoVisitante').value;
-    const cpf = document.getElementById('cpf');
-    const passaporte = document.getElementById('passaporte');
-    const labelCpf = document.getElementById('label-cpf');
-    const labelPassaporte = document.getElementById('label-passaporte');
+function trocarDocumento() {
+  const tipo = document.getElementById('tipoVisitante').value;
+  const cpfInput = document.getElementById('cpf');
+  const passaporteInput = document.getElementById('passaporte');
+  const cpfLabel = document.getElementById('label-cpf');
+  const passLabel = document.getElementById('label-passaporte');
 
-    if(tipo === 'br') {
-      cpf.style.display = 'block';
-      labelCpf.style.display = 'block';
-      passaporte.style.display = 'none';
-      labelPassaporte.style.display = 'none';
-    } else {
-      cpf.style.display = 'none';
-      labelCpf.style.display = 'none';
-      passaporte.style.display = 'block';
-      labelPassaporte.style.display = 'block';
-    }
+  if (tipo === 'gringo') {
+    cpfInput.style.display = "none";
+    cpfLabel.style.display = "none";
+    passaporteInput.style.display = "block";
+    passLabel.style.display = "block";
+    cpfInput.required = false;
+    passaporteInput.required = true;
+  } else {
+    cpfInput.style.display = "block";
+    cpfLabel.style.display = "block";
+    passaporteInput.style.display = "none";
+    passLabel.style.display = "none";
+    cpfInput.required = true;
+    passaporteInput.required = false;
   }
-
-  
-function validCpf(cpf) {
-  cpf = cpf.replace(/[^\d]+/g,'');
-  if(cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
 }
 
+
 function validarForm() {
-  let valid = true;
   const tipo = document.getElementById('tipoVisitante').value;
-
   const nome = document.getElementById('nome').value.trim();
-  if (nome.length < 3) {
-    document.getElementById('nome').style.border = '1px solid red'
-    valid = false;
-
-  }
-
-  if(tipo==='br') {
-    const cpf = document.getElementById('cpf').value.replace(/\D/g,'');
-    if(!validCpf(cpf)){ document.getElementById('cpf').style.border = '1px solid red'; valid=false; }
-  } else {
-    const passaporte = document.getElementById('passaporte').value.trim();
-    if(passaporte.length < 6){ document.getElementById('passaporte').style.border = '1px solid red'; valid=false; }
-  }
-
+  const cpf = document.getElementById('cpf').value.trim();
+  const passaporte = document.getElementById('passaporte').value.trim();
   const email = document.getElementById('email').value.trim();
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if(!emailRegex.test(email)){ document.getElementById('email').style.border = '1px solid red'; valid=false; }
-
   const telefone = document.getElementById('telefone').value.trim();
-  if(telefone.length < 10){ document.getElementById('telefone').style.border = '1px solid red'; valid=false; }
 
-  return valid;
+  if (!nome || !email || !telefone || (tipo === 'br' && !cpf) || (tipo === 'gringo' && !passaporte)) {
+    alert("Preencha todos os campos obrigatórios.");
+    return;
+  }
+
+  if (!email.includes("@")) {
+    alert("Digite um e-mail válido.");
+    return;
+  }
+
+  if (tipo === 'br' && !validarCPF(cpf)) {
+    alert("CPF inválido.");
+    return;
+  }
+
+  // Cria form invisível pra enviar tudo via POST
+  const form = document.createElement("form");
+  form.method = "POST";
+  form.action = "/bilheteria/screens/pagamento.php";
+
+  adicionarCampo(form, "tipo", tipo);
+  adicionarCampo(form, "nome", nome);
+  adicionarCampo(form, "cpf", cpf);
+  adicionarCampo(form, "passaporte", passaporte);
+  adicionarCampo(form, "email", email);
+  adicionarCampo(form, "telefone", telefone);
+
+  // 👉 Tickets e validade (se existirem)
+  document.querySelectorAll("input[name^='quantities']").forEach(input => {
+    adicionarCampo(form, input.name, input.value);
+  });
+
+  const validade = document.querySelector("input[name='validade']")?.value;
+  if (validade) {
+    adicionarCampo(form, "validade", validade);
+  }
+
+  document.body.appendChild(form);
+  form.submit();
+}
+
+// ================= Helpers =================
+
+function adicionarCampo(form, nome, valor) {
+  const input = document.createElement("input");
+  input.type = "hidden";
+  input.name = nome;
+  input.value = valor;
+  form.appendChild(input);
+}
+
+function validarCPF(cpf) {
+  cpf = cpf.replace(/\D/g, '');
+  if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
+
+  let soma = 0, resto;
+
+  for (let i = 1; i <= 9; i++)
+    soma += parseInt(cpf.substring(i-1, i)) * (11 - i);
+
+  resto = (soma * 10) % 11;
+  if (resto === 10 || resto === 11) resto = 0;
+  if (resto !== parseInt(cpf.substring(9, 10))) return false;
+
+  soma = 0;
+  for (let i = 1; i <= 10; i++)
+    soma += parseInt(cpf.substring(i-1, i)) * (12 - i);
+
+  resto = (soma * 10) % 11;
+  if (resto === 10 || resto === 11) resto = 0;
+  if (resto !== parseInt(cpf.substring(10, 11))) return false;
+
+  return true;
 }
