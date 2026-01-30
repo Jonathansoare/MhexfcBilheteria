@@ -131,7 +131,7 @@ ul{padding-left:16px}
 
     <div class="top-bar">
         <span class="user">👤 Bilheteiro</span>
-        <a href="/bilheteria/?route=logoutBilheteiro" class="logout-btn">Sair</a>
+        <a href="/bilheteria/bilheteiro/logout" class="logout-btn">Sair</a>
     </div>
 
     <h1>Validação de Ingressos</h1>
