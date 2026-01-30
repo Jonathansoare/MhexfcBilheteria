@@ -41,6 +41,33 @@ body{
     overflow-y:auto;
 }
 
+.top-bar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:4px 6px;
+}
+
+.top-bar .user{
+    font-size:13px;
+    color:#444;
+}
+
+.logout-btn{
+    background:#e53935;
+    color:#fff;
+    text-decoration:none;
+    padding:6px 12px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:600;
+    transition:.2s;
+}
+
+.logout-btn:hover{
+    background:#c62828;
+}
+
 h1{
     font-size:20px;
     margin:0;
@@ -51,12 +78,10 @@ h1{
 
 #qr-reader{
     width:100%;
-    max-height:260px;   /* controla o tamanho visual */
-    aspect-ratio:1/1;  /* força formato quadrado */
+    max-height:260px;
+    aspect-ratio:1/1;
     overflow:hidden;
 }
-
-
 
 .card{
     background:#f8f9fb;
@@ -97,17 +122,17 @@ ul{padding-left:16px}
     from{opacity:0;transform:translateY(4px)}
     to{opacity:1;transform:translateY(0)}
 }
-
-@media (max-width:360px){
-    h1{font-size:18px}
-    .card p,.card li{font-size:13px}
-    .badge{font-size:11px;padding:5px 8px}
-}
 </style>
 </head>
 <body>
 
 <div class="app">
+
+    <div class="top-bar">
+        <span class="user">👤 Bilheteiro</span>
+        <a href="/bilheteria/?route=logoutBilheteiro" class="logout-btn">Sair</a>
+    </div>
+
     <h1>Validação de Ingressos</h1>
 
     <div id="qr-reader"></div>
