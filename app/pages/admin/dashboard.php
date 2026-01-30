@@ -22,7 +22,7 @@ $listaIngressos = [
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Dashboard | Bilheteiro Pro</title>
+<title>Dashboard</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -124,8 +124,7 @@ body{margin:0;font-family:'Segoe UI',sans-serif;background:#f3f6fb;display:flex}
   box-shadow:0 6px 14px rgba(26,188,156,.3);
 }
 
-
-/* Container dos filtros */
+\/* Container dos filtros */
 #financeiro .filtros {
   display: flex;
   flex-wrap: wrap;
