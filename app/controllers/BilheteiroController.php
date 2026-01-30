@@ -21,7 +21,7 @@ class BilheteiroController {
         $this->checkAuth();
         header('Content-Type: application/json');
 
-        $codigo = $_POST['codigo'] ?? '';
+        $codigo = $_GET['codigo'] ?? $_POST['codigo'] ?? '';
         if (!$codigo) {
             echo json_encode(['status' => 'error', 'message' => 'Código não informado']);
             exit;
@@ -58,7 +58,8 @@ class BilheteiroController {
 
     // EXEMPLO SIMPLES
         if ($user === 'admin' && $pass === '1234') {
-        $_SESSION['bilheteiro_user'] = $user;
+            $_SESSION['user_tipo'] = 'bilheteiro';
+            $_SESSION['bilheteiro_user'] = $user;
         echo json_encode(['status' => 'ok']);
         } else {
         echo json_encode(['status' => 'error', 'message' => 'Usuário ou senha inválidos']);
@@ -67,7 +68,7 @@ class BilheteiroController {
 
     public function logout() {
         session_destroy();
-        header("Location: /bilheteria/?route=loginBilheteiro");
+        header("Location: /bilheteria/?route=logoutBilheteiro");
         exit;
     }
 
