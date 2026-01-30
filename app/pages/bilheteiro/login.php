@@ -1,6 +1,8 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) session_start();
+
 if (!empty($_SESSION['bilheteiro_user'])) {
-    header("Location: /bilheteria/?route=dashboardBilheteiro");
+    header("Location: /bilheteria/bilheteiro/dashboard");
     exit;
 }
 ?>
@@ -20,7 +22,6 @@ body {
     justify-content: center;
     font-family: Arial, sans-serif;
 }
-
 .login-box {
     background: #fff;
     padding: 32px;
@@ -29,43 +30,27 @@ body {
     max-width: 360px;
     box-shadow: 0 10px 25px rgba(0,0,0,.2);
 }
-
 .login-box h2 {
     text-align: center;
     margin-bottom: 24px;
     color: #1e3c72;
 }
-
-.login-box input {
+.login-box input, .login-box button {
     width: 100%;
     padding: 12px;
     margin-bottom: 14px;
     border-radius: 8px;
-    border: 1px solid #ccc;
     font-size: 15px;
 }
-
+.login-box input { border: 1px solid #ccc; }
 .login-box button {
-    width: 100%;
-    padding: 12px;
     background: #1e3c72;
     border: none;
-    border-radius: 8px;
     color: #fff;
-    font-size: 16px;
     cursor: pointer;
 }
-
-.login-box button:hover {
-    background: #16305a;
-}
-
-.msg {
-    text-align: center;
-    margin-top: 10px;
-    font-size: 14px;
-    color: red;
-}
+.login-box button:hover { background: #16305a; }
+.msg { text-align: center; font-size: 14px; color: red; }
 </style>
 </head>
 <body>
@@ -81,33 +66,24 @@ body {
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("loginForm");
-    const msg  = document.getElementById("msg");
+document.getElementById("loginForm").addEventListener("submit", e => {
+    e.preventDefault();
+    const msg = document.getElementById("msg");
+    msg.textContent = "Entrando...";
 
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        msg.textContent = "Entrando...";
-
-        const formData = new FormData(form);
-
-        try {
-            const res = await fetch("/bilheteria/?route=doLogin", {
-                method: "POST",
-                body: formData
-            });
-
-            const data = await res.json();
-
-            if (data.status === "ok") {
-                window.location.href = "/bilheteria/?route=dashboardBilheteiro";
-            } else {
-                msg.textContent = data.message || "Erro ao entrar";
-            }
-        } catch (err) {
-            msg.textContent = "Erro de conexão";
+    fetch('/bilheteria/bilheteiro/doLogin', {
+        method: 'POST',
+        body: new FormData(e.target)
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === 'ok') {
+            window.location.href = data.redirect;
+        } else {
+            msg.textContent = data.message;
         }
-    });
+    })
+    .catch(() => msg.textContent = 'Erro de conexão com o servidor');
 });
 </script>
 

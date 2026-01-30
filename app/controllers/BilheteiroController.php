@@ -4,16 +4,28 @@ namespace App\Controllers;
 class BilheteiroController {
 
     public function login() {
+        if (session_status() === PHP_SESSION_NONE) session_start();
+
+        // Se já estiver logado, redireciona conforme tipo
+        if (!empty($_SESSION['bilheteiro_user'])) {
+            if ($_SESSION['user_tipo'] === 'admin') {
+                header("Location: /bilheteria/bilheteiro/dashboard");
+            } else {
+                header("Location: /bilheteria/bilheteiro/validacao");
+            }
+            exit;
+        }
+
         require __DIR__ . '/../pages/bilheteiro/login.php';
     }
 
     public function dashboard() {
-        $this->checkAuth();
-        require __DIR__ . '/../pages/admin/dashboard.php'; // Dashboard agora na pasta admin
+        $this->checkAuth('admin');
+        require __DIR__ . '/../pages/admin/dashboard.php';
     }
 
     public function validacao() {
-        $this->checkAuth();
+        $this->checkAuth('bilheteiro');
         require __DIR__ . '/../pages/bilheteiro/validacao.php';
     }
 
@@ -27,17 +39,16 @@ class BilheteiroController {
             exit;
         }
 
-        // Dados de teste (simula consulta ao banco)
         $ingressosFake = [
             'ABC123' => [
-                'nome'      => 'João Silva',
-                'data'      => '20/01/2026',
-                'quantidade'=> ['Inteira'=>2, 'Meia'=>1, 'Isento'=>0]
+                'nome' => 'João Silva',
+                'data' => '20/01/2026',
+                'quantidade' => ['Inteira'=>2, 'Meia'=>1, 'Isento'=>0]
             ],
             'XYZ456' => [
-                'nome'      => 'Maria Santos',
-                'data'      => '22/01/2026',
-                'quantidade'=> ['Inteira'=>1, 'Meia'=>2, 'Isento'=>0]
+                'nome' => 'Maria Santos',
+                'data' => '22/01/2026',
+                'quantidade' => ['Inteira'=>1, 'Meia'=>2, 'Isento'=>0]
             ]
         ];
 
@@ -48,33 +59,57 @@ class BilheteiroController {
         }
     }
 
-   public function doLogin() {
+    public function doLogin() {
         if (session_status() === PHP_SESSION_NONE) session_start();
-
+        header('Content-Type: application/json');
 
         $user = $_POST['user'] ?? '';
         $pass = $_POST['pass'] ?? '';
 
-
-    // EXEMPLO SIMPLES
         if ($user === 'admin' && $pass === '1234') {
+            $_SESSION['user_tipo'] = 'admin';
+            $_SESSION['bilheteiro_user'] = $user;
+
+            echo json_encode([
+                'status' => 'ok',
+                'redirect' => '/bilheteria/bilheteiro/dashboard'
+            ]);
+            exit;
+        }
+
+        if ($user === 'bilheteiro' && $pass === '1234') {
             $_SESSION['user_tipo'] = 'bilheteiro';
             $_SESSION['bilheteiro_user'] = $user;
-        echo json_encode(['status' => 'ok']);
-        } else {
-        echo json_encode(['status' => 'error', 'message' => 'Usuário ou senha inválidos']);
-        }
-    }
 
-    public function logout() {
-        session_destroy();
-        header("Location: /bilheteria/?route=logoutBilheteiro");
+            echo json_encode([
+                'status' => 'ok',
+                'redirect' => '/bilheteria/bilheteiro/validacao'
+            ]);
+            exit;
+        }
+
+        echo json_encode(['status' => 'error', 'message' => 'Usuário ou senha inválidos']);
         exit;
     }
 
-    private function checkAuth() {
+    public function logout() {
+    if (session_status() === PHP_SESSION_NONE) session_start();
+    session_destroy();
+
+    header("Location: /bilheteria/bilheteiro/login");
+    exit;
+}
+
+    private function checkAuth($tipo = null) {
+        if (session_status() === PHP_SESSION_NONE) session_start();
+
         if (empty($_SESSION['bilheteiro_user'])) {
-            header("Location: /bilheteria/?route=loginBilheteiro");
+            header("Location: /bilheteria/bilheteiro/login");
+            exit;
+        }
+
+        if ($tipo && $_SESSION['user_tipo'] !== $tipo) {
+            header("Location: /bilheteria/bilheteiro/login");
             exit;
         }
     }

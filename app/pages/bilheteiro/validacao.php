@@ -1,10 +1,11 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) session_start();
 
-if (empty($_SESSION['bilheteiro_user'])) {
-    header('Location: /bilheteria/?route=loginBilheteiro');
+if ($_SESSION['user_tipo'] !== 'bilheteiro') {
+    header("Location: /bilheteria/bilheteiro/dashboard");
     exit;
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

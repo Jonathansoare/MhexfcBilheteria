@@ -1,10 +1,11 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) session_start();
 
-if (empty($_SESSION['bilheteiro_user'])) {
-    header("Location: /bilheteria/?route=loginBilheteiro");
+if ($_SESSION['user_tipo'] !== 'admin') {
+    header("Location: /bilheteria/bilheteiro/validacao");
     exit;
 }
+
 
 // Dados fictícios (depois ligamos no banco)
 $totalIngressosVendidos = 750;
@@ -283,7 +284,7 @@ body{margin:0;font-family:'Segoe UI',sans-serif;background:#f3f6fb;display:flex}
   <h1>Painel Administrativo</h1>
   <div>
     👤 <?= $nomeUser ?> |
-    <a href="/bilheteria/logout.php" style="color:#e74c3c;font-weight:bold;text-decoration:none">Sair</a>
+    <a href="/bilheteria/bilheteiro/logout" style="color:#e74c3c;font-weight:bold;text-decoration:none">Sair</a>
   </div>
 </div>
 

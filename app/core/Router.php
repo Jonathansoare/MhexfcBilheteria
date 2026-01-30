@@ -3,28 +3,31 @@ namespace App\Core;
 
 class Router {
     public static function run() {
-        // Recebe a rota via POST ou GET
-        $route = $_POST['route'] ?? $_GET['route'] ?? 'home';
+
+        $url = $_GET['url'] ?? '';
+        $url = trim($url, '/');
 
         $routes = [
-            'home'            => ['controller' => 'HomeController', 'method' => 'index'],
-            'dados'           => ['controller' => 'HomeController', 'method' => 'dados'],
-            'pagamento'       => ['controller' => 'HomeController', 'method' => 'pagamento'],
-            'setLang'         => ['controller' => 'HomeController', 'method' => 'setLang'],
-            'loginBilheteiro' => ['controller' => 'BilheteiroController', 'method' => 'login'],
-            'dashboardBilheteiro' => ['controller' => 'BilheteiroController', 'method' => 'dashboard'],
-            'validacaoBilheteiro' => ['controller' => 'BilheteiroController', 'method' => 'validacao'],
-            'validarBilheteiro'   => ['controller' => 'BilheteiroController', 'method' => 'validar'],
-            'doLogin' => ['controller' => 'BilheteiroController', 'method' => 'doLogin'],
-            'logoutBilheteiro'    => ['controller' => 'BilheteiroController', 'method' => 'logout']
+            ''                     => ['controller' => 'HomeController', 'method' => 'index'],
+            'home'                 => ['controller' => 'HomeController', 'method' => 'index'],
+
+            // Bilheteiro
+            'bilheteiro/login'     => ['controller' => 'BilheteiroController', 'method' => 'login'],
+            'bilheteiro/dashboard' => ['controller' => 'BilheteiroController', 'method' => 'dashboard'],
+            'bilheteiro/validacao' => ['controller' => 'BilheteiroController', 'method' => 'validacao'],
+            'bilheteiro/validar'   => ['controller' => 'BilheteiroController', 'method' => 'validar'],
+            'bilheteiro/doLogin'  => ['controller' => 'BilheteiroController', 'method' => 'doLogin'],
+            'bilheteiro/logout'    => ['controller' => 'BilheteiroController', 'method' => 'logout'],
         ];
 
-        if (!isset($routes[$route])) {
-            $route = 'home';
+
+        if (!isset($routes[$url])) {
+            // DEBUG temporário 👇
+            // echo "Rota não encontrada: " . htmlspecialchars($url);
+            $url = '';
         }
 
-        $config = $routes[$route];
-
+        $config = $routes[$url];
         $controllerName = "\\App\\Controllers\\" . $config['controller'];
         $controller = new $controllerName;
         $method = $config['method'];
