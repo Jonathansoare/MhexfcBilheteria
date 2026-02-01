@@ -6,7 +6,6 @@ class BilheteiroController {
     public function login() {
         if (session_status() === PHP_SESSION_NONE) session_start();
 
-        // Se já estiver logado, redireciona conforme tipo
         if (!empty($_SESSION['bilheteiro_user'])) {
             if ($_SESSION['user_tipo'] === 'admin') {
                 header("Location: /bilheteria/bilheteiro/dashboard");
@@ -30,34 +29,84 @@ class BilheteiroController {
     }
 
     public function validar() {
-        $this->checkAuth();
-        header('Content-Type: application/json');
+    header('Content-Type: application/json');
 
-        $codigo = $_GET['codigo'] ?? $_POST['codigo'] ?? '';
-        if (!$codigo) {
-            echo json_encode(['status' => 'error', 'message' => 'Código não informado']);
-            exit;
-        }
+    if (session_status() === PHP_SESSION_NONE) session_start();
 
-        $ingressosFake = [
-            'ABC123' => [
-                'nome' => 'João Silva',
-                'data' => '20/01/2026',
-                'quantidade' => ['Inteira'=>2, 'Meia'=>1, 'Isento'=>0]
-            ],
-            'XYZ456' => [
-                'nome' => 'Maria Santos',
-                'data' => '22/01/2026',
-                'quantidade' => ['Inteira'=>1, 'Meia'=>2, 'Isento'=>0]
-            ]
-        ];
+    $codigo = trim($_GET['codigo'] ?? '');
 
-        if (isset($ingressosFake[$codigo])) {
-            echo json_encode(array_merge(['status'=>'ok'], $ingressosFake[$codigo]));
-        } else {
-            echo json_encode(['status'=>'error', 'message'=>'Ingresso inválido']);
+    if ($codigo === '') {
+        echo json_encode(["status"=>"invalid","mensagem"=>"❌ Código vazio"]);
+        return;
+    }
+
+    // Base fake (DEMO)
+    $base = [
+        "ABC123" => ["nome"=>"João Silva","data"=>"2026-01-31","quantidade"=>["Inteira"=>2,"Meia"=>1,"Isento"=>0]],
+        "XYZ456" => ["nome"=>"Maria Santos","data"=>"2026-01-30","quantidade"=>["Inteira"=>1,"Meia"=>2,"Isento"=>0]],
+        "VIP777" => ["nome"=>"Cliente VIP","data"=>"2026-01-31","quantidade"=>["Inteira"=>1,"Meia"=>0,"Isento"=>0]],
+        "FREE999"=> ["nome"=>"Cortesia","data"=>"2026-01-29","quantidade"=>["Inteira"=>0,"Meia"=>0,"Isento"=>1]],
+    ];
+
+    if (!isset($base[$codigo])) {
+        echo json_encode(["status"=>"invalid","mensagem"=>"❌ QR Code não encontrado"]);
+        return;
+    }
+
+    $ingresso = $base[$codigo];
+
+    $hoje = new \DateTime('today');
+    $dataIngresso = new \DateTime($ingresso['data']);
+    $agora = new \DateTime();
+
+    // Sessão para controle diário
+    if (!isset($_SESSION['usos'])) $_SESSION['usos'] = [];
+
+    $usadoHoje = false;
+    $horaUltimoUso = null;
+
+    if (isset($_SESSION['usos'][$codigo])) {
+        $registro = $_SESSION['usos'][$codigo];
+        if ($registro['data'] === $hoje->format('Y-m-d')) {
+            $usadoHoje = true;
+            $horaUltimoUso = $registro['hora'];
         }
     }
+
+    if ($hoje > $dataIngresso) {
+        $status = 'expired';
+        $mensagem = '❌ Ingresso expirado em ' . $dataIngresso->format('d/m/Y');
+    } else {
+        $status = 'ok';
+
+        if ($hoje == $dataIngresso) {
+            $mensagem = '⚠️ Válido somente hoje (' . $dataIngresso->format('d/m/Y') . ')';
+        } else {
+            $mensagem = '✅ Ingresso válido para ' . $dataIngresso->format('d/m/Y');
+        }
+
+        if ($usadoHoje) {
+            $mensagem .= ' • ⚠️ Já validado hoje às ' . $horaUltimoUso;
+        }
+
+        // Marca uso do dia
+        $_SESSION['usos'][$codigo] = [
+            'data' => $hoje->format('Y-m-d'),
+            'hora' => $agora->format('H:i:s')
+        ];
+    }
+
+    echo json_encode([
+        "status"=>$status,
+        "mensagem"=>$mensagem,
+        "codigo"=>$codigo,
+        "nome"=>$ingresso['nome'],
+        "data"=>$ingresso['data'],
+        "quantidade"=>$ingresso['quantidade'],
+        "hora_validacao"=>$agora->format('H:i:s')
+    ]);
+}
+
 
     public function doLogin() {
         if (session_status() === PHP_SESSION_NONE) session_start();
@@ -93,22 +142,16 @@ class BilheteiroController {
     }
 
     public function logout() {
-    if (session_status() === PHP_SESSION_NONE) session_start();
-    session_destroy();
-
-    header("Location: /bilheteria/bilheteiro/login");
-    exit;
-}
-
-    private function checkAuth($tipo = null) {
         if (session_status() === PHP_SESSION_NONE) session_start();
+        session_destroy();
 
-        if (empty($_SESSION['bilheteiro_user'])) {
-            header("Location: /bilheteria/bilheteiro/login");
-            exit;
-        }
+        header("Location: /bilheteria/bilheteiro/login");
+        exit;
+    }
 
-        if ($tipo && $_SESSION['user_tipo'] !== $tipo) {
+    private function checkAuth($tipo=null){
+        if (session_status() === PHP_SESSION_NONE) session_start();
+        if (empty($_SESSION['bilheteiro_user']) || ($tipo && $_SESSION['user_tipo'] !== $tipo)) {
             header("Location: /bilheteria/bilheteiro/login");
             exit;
         }

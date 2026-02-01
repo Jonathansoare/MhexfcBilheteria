@@ -13,6 +13,9 @@ class HomeController {
     public function pagamento(){
         require __DIR__ . '/../pages/pagamento.php';
     }
+    public function qrCodeFake(){
+        require __DIR__ . '/../pages/qrcodes-demo.php';
+    }
 
     public function setLang() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['lang'])) {

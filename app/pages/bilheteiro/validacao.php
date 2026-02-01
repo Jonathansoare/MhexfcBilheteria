@@ -1,11 +1,8 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) session_start();
-
 if ($_SESSION['user_tipo'] !== 'bilheteiro') {
-    header("Location: /bilheteria/bilheteiro/dashboard");
-    exit;
+  header("Location: /bilheteria/bilheteiro/dashboard"); exit;
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -13,188 +10,270 @@ if ($_SESSION['user_tipo'] !== 'bilheteiro') {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Validação de Ingressos</title>
-<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+<script src="https://unpkg.com/html5-qrcode"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box}
-
 body{
-    margin:0;
-    min-height:100vh;
-    background:linear-gradient(135deg,#1e3c72,#2a5298);
-    font-family:'Inter',Arial,sans-serif;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:12px;
+  margin:0;
+  background:linear-gradient(135deg,#1e3c72,#2a5298);
+  font-family:'Inter',sans-serif;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
 }
 
+/* App container */
 .app{
-    background:#fff;
-    width:100%;
-    max-width:480px;
-    height:80vh;
-    border-radius:18px;
-    padding:14px;
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-    overflow-y:auto;
+  background:#fff;
+  width:100%;
+  max-width:420px;
+  height:90vh;
+  border-radius:20px;
+  padding:16px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  box-shadow:0 12px 30px rgba(0,0,0,.25);
 }
 
+/* Top bar */
 .top-bar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:4px 6px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:14px;
+  color:#333;
 }
 
-.top-bar .user{
-    font-size:13px;
-    color:#444;
-}
-
-.logout-btn{
-    background:#e53935;
-    color:#fff;
-    text-decoration:none;
-    padding:6px 12px;
-    border-radius:999px;
-    font-size:12px;
-    font-weight:600;
-    transition:.2s;
-}
-
-.logout-btn:hover{
-    background:#c62828;
-}
-
-h1{
-    font-size:20px;
-    margin:0;
-    text-align:center;
-    color:#1e3c72;
-    font-weight:700;
-}
-
+/* Scanner */
 #qr-reader{
-    width:100%;
-    max-height:260px;
-    aspect-ratio:1/1;
-    overflow:hidden;
+  width:100%;
+  aspect-ratio:1/1;
+  border-radius:14px;
+  overflow:hidden;
+  background:#000;
 }
 
-.card{
-    background:#f8f9fb;
-    border-radius:14px;
-    padding:12px;
+/* Overlay modal */
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
 }
 
-.card p,.card li{
-    font-size:14px;
-    margin:6px 0;
-    color:#333;
+/* Modal box */
+.modal{
+  background:#fff;
+  padding:22px;
+  border-radius:18px;
+  width:90%;
+  max-width:360px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start; /* 👈 tudo à esquerda por padrão */
+  animation:pop .25s ease;
+  box-shadow:0 12px 28px rgba(0,0,0,.25);
 }
 
-.card strong{color:#1e3c72}
-
-ul{padding-left:16px}
-
-.status{
-    margin-top:8px;
-    font-weight:600;
-    font-size:15px;
+/* Title */
+.modal-title{
+  width:100%;
+  text-align:center;
+  font-size:18px;
+  font-weight:700;
+  color:#1e3c72;
+  margin:4px 0 10px;
 }
 
+/* Resultado container à ESQUERDA */
+.resultados{
+  width:100%;
+  margin-top:8px;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  text-align:left;
+}
+
+.modal button{
+  align-self:center;   /* 👈 força o botão pro centro */
+  margin-top:16px;
+}
+
+/* Linhas */
+.resultados p,
+.resultados li{
+  margin:0;
+  font-size:14px;
+  color:#333;
+}
+
+/* Badge */
 .badge{
-    display:inline-block;
-    padding:6px 10px;
-    border-radius:999px;
-    font-size:12px;
-    font-weight:600;
+  margin-top:12px;
+  padding:6px 14px;
+  border-radius:999px;
+  font-weight:600;
+  font-size:13px;
 }
 
-.badge.valid{background:#e7f7ef;color:#0f7a3d}
-.badge.invalid{background:#fdecea;color:#b00020}
+.valid{background:#e7f7ef;color:#0f7a3d}
+.invalid{background:#fdecea;color:#b00020}
 
-.fade{animation:fadeIn .3s ease}
-
-@keyframes fadeIn{
-    from{opacity:0;transform:translateY(4px)}
-    to{opacity:1;transform:translateY(0)}
+/* Botão */
+button{
+  margin-top:16px;
+  padding:10px 20px;
+  border:none;
+  border-radius:999px;
+  background:#1e3c72;
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+  transition:.2s;
+}
+button:hover{
+  background:#16325d;
+}
+@keyframes pop{
+  from{transform:scale(.8);opacity:0}
+  to{transform:scale(1);opacity:1}
 }
 </style>
 </head>
 <body>
 
 <div class="app">
-
-    <div class="top-bar">
-        <span class="user">👤 Bilheteiro</span>
-        <a href="/bilheteria/bilheteiro/logout" class="logout-btn">Sair</a>
-    </div>
-
-    <h1>Validação de Ingressos</h1>
-
-    <div id="qr-reader"></div>
-
-    <div class="card fade" id="info">
-        <p><strong>Nome:</strong> <span id="nome">---</span></p>
-        <p><strong>Data da compra:</strong> <span id="data">---</span></p>
-
-        <p><strong>Ingressos:</strong></p>
-        <ul>
-            <li>Inteira: <span id="inteira">0</span></li>
-            <li>Meia: <span id="meia">0</span></li>
-            <li>Isento: <span id="isento">0</span></li>
-        </ul>
-
-        <div class="status">
-            Status:
-            <span id="status" class="badge">---</span>
-        </div>
-    </div>
+  <div class="top-bar">
+    <strong>👤 Bilheteiro</strong>
+    <a href="/bilheteria/bilheteiro/logout">Sair</a>
+  </div>
+  <h2 style="text-align:center">Validação</h2>
+  <div id="qr-reader"></div>
 </div>
 
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h3 id="m-msg" class="modal-title">Resultado</h3>
+
+    <p><strong>👤 Nome:</strong> <span id="m-nome"></span></p>
+    <p><strong>🔐 Código:</strong> <span id="m-codigo"></span></p>
+
+    <p><strong>📅 Data do ingresso:</strong> <span id="m-data"></span></p>
+    <p><strong>⏰ Hora da leitura:</strong> <span id="m-hora"></span></p>
+    <p><strong>⌛ Validade:</strong> <span id="m-validade"></span></p>
+
+    <div class="resultados">
+      <span>🎟️ Inteira: <span id="m-inteira"></span></span>
+      <span>🎫 Meia: <span id="m-meia"></span></span>
+      <span>🆓 Isento: <span id="m-isento"></span></span>
+      <div><span id="m-status" class="badge"></span></div>
+    </div>
+
+    <button id="close">Fechar</button>
+  </div>
+</div>
+
+
 <script>
-const infoCard = document.getElementById('info');
+let lendo = false;
+let timeoutScan = null;
 
-function atualizarInfo(ingresso){
-    infoCard.classList.remove('fade');
-    void infoCard.offsetWidth;
-    infoCard.classList.add('fade');
+const modal      = document.getElementById("modal");
+const statusEl   = document.getElementById("m-status");
+const msgEl      = document.getElementById("m-msg");
+const nomeEl     = document.getElementById("m-nome");
+const dataEl     = document.getElementById("m-data");
+const inteiraEl  = document.getElementById("m-inteira");
+const meiaEl     = document.getElementById("m-meia");
+const isentoEl   = document.getElementById("m-isento");
+const codigoEl   = document.getElementById("m-codigo");
+const horaEl     = document.getElementById("m-hora");
+const validadeEl = document.getElementById("m-validade");
 
-    document.getElementById('nome').innerText = ingresso.nome || '---';
-    document.getElementById('data').innerText = ingresso.data || '---';
+function abrirModal(i) {
+  // Preenche dados
+  nomeEl.textContent    = i.nome || '---';
+  codigoEl.textContent  = i.codigo || '---';
+  dataEl.textContent    = i.data || '---';
+  inteiraEl.textContent = i.quantidade?.Inteira || 0;
+  meiaEl.textContent    = i.quantidade?.Meia || 0;
+  isentoEl.textContent  = i.quantidade?.Isento || 0;
 
-    document.getElementById('inteira').innerText = ingresso.quantidade?.Inteira ?? 0;
-    document.getElementById('meia').innerText    = ingresso.quantidade?.Meia ?? 0;
-    document.getElementById('isento').innerText  = ingresso.quantidade?.Isento ?? 0;
+  horaEl.textContent     = new Date().toLocaleTimeString('pt-BR');
+  validadeEl.textContent = i.mensagem || '';
 
-    const statusEl = document.getElementById('status');
-    if(ingresso.status === 'ok'){
-        statusEl.innerText = "Válido";
-        statusEl.className = "badge valid";
-    } else {
-        statusEl.innerText = "Inválido";
-        statusEl.className = "badge invalid";
-    }
+  // Status visual
+  if (i.status === 'ok') {
+    statusEl.className = 'badge valid';
+    statusEl.textContent = 'VÁLIDO';
+  } else {
+    statusEl.className = 'badge invalid';
+    statusEl.textContent = 'INVÁLIDO';
+  }
+
+  msgEl.textContent = i.mensagem || 'Resultado';
+
+  modal.style.display = "flex";
+  pararLeitura();
 }
 
+function pararLeitura() {
+  try {
+    html5QrCode.stop();
+  } catch(e){}
+}
+
+function iniciarLeitura() {
+  lendo = false;
+  html5QrCode.start(
+    { facingMode: "environment" },
+    { fps: 12, qrbox: { width: 260, height: 260 } },
+    onScanSuccess,
+    () => {}
+  );
+}
+
+function onScanSuccess(txt) {
+  if (lendo) return;
+  lendo = true;
+
+  const codigo = txt.trim();
+  msgEl.textContent = "🔎 Validando ingresso...";
+  
+  // Timeout de segurança
+  timeoutScan = setTimeout(() => {
+    lendo = false;
+  }, 5000);
+
+  fetch("/bilheteria/bilheteiro/validar?codigo=" + encodeURIComponent(codigo))
+    .then(r => r.json())
+    .then(data => {
+      clearTimeout(timeoutScan);
+      abrirModal(data);
+    })
+    .catch(err => {
+      clearTimeout(timeoutScan);
+      lendo = false;
+      alert("Erro ao validar ingresso. Verifique a conexão.");
+      iniciarLeitura();
+    });
+}
+
+// Fechar modal
+document.getElementById("close").onclick = () => {
+  modal.style.display = "none";
+  iniciarLeitura();
+};
+
+// Inicia leitura
 const html5QrCode = new Html5Qrcode("qr-reader");
-
-html5QrCode.start(
-    { facingMode:"environment" },
-    { fps: 10, qrbox: { width: 250, height: 400 } },
-    decodedText => {
-        fetch("/bilheteria/?route=validarBilheteiro&codigo="+encodeURIComponent(decodedText))
-            .then(r=>r.json())
-            .then(atualizarInfo)
-            .catch(console.error);
-    },
-    ()=>{}
-);
+iniciarLeitura();
 </script>
-
 </body>
 </html>

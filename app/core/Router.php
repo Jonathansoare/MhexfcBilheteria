@@ -8,8 +8,12 @@ class Router {
         $url = trim($url, '/');
 
         $routes = [
-            ''                     => ['controller' => 'HomeController', 'method' => 'index'],
-            'home'                 => ['controller' => 'HomeController', 'method' => 'index'],
+            '' => ['controller' => 'HomeController', 'method' => 'index'],
+            'home' => ['controller' => 'HomeController', 'method' => 'index'],
+            'dados' => ['controller' => 'HomeController', 'method' => 'dados'],
+            'pagamento' => ['controller' => 'HomeController', 'method' => 'pagamento'],
+            'setLang' => ['controller' => 'HomeController', 'method' => 'setLang'],
+            'qr-demo' => ['controller' => 'HomeController', 'method' => 'qrCodeFake'],
 
             // Bilheteiro
             'bilheteiro/login'     => ['controller' => 'BilheteiroController', 'method' => 'login'],
