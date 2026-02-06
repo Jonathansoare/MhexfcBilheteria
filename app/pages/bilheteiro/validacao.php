@@ -166,7 +166,7 @@ button:hover{
 
     <p><strong>📅 Data do ingresso:</strong> <span id="m-data"></span></p>
     <p><strong>⏰ Hora da leitura:</strong> <span id="m-hora"></span></p>
-    <p><strong>⌛ Validade:</strong> <span id="m-validade"></span></p>
+    <p><strong>⌛ Validade:</strong><span id="m-validade"></span></p>
 
     <div class="resultados">
       <span>🎟️ Inteira: <span id="m-inteira"></span></span>
@@ -204,6 +204,7 @@ function abrirModal(i) {
   inteiraEl.textContent = i.quantidade?.Inteira || 0;
   meiaEl.textContent    = i.quantidade?.Meia || 0;
   isentoEl.textContent  = i.quantidade?.Isento || 0;
+  validadeEl.textContent = i.dataValidade || '---';
 
   horaEl.textContent     = new Date().toLocaleTimeString('pt-BR');
   validadeEl.textContent = i.mensagem || '';

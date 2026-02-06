@@ -1,5 +1,8 @@
 <?php
 // Apenas inicia sessão se ainda não houver
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -95,7 +98,6 @@ $validade = match ($validadeKey) {
 
 <!-- JS -->
 <script src="/bilheteria/app/components/VisitanteForm/VisitanteForm.js"></script>
-<script src="/bilheteria/public/js/dadosPesson.js"></script>
 <script src="<?= APP_URL ?>/components/Header/Header.js"></script>
 
 </body>

@@ -22,7 +22,6 @@ function trocarDocumento() {
   }
 }
 
-
 function validarForm() {
   const tipo = document.getElementById('tipoVisitante').value;
   const nome = document.getElementById('nome').value.trim();
@@ -49,7 +48,8 @@ function validarForm() {
   // Cria form invisível pra enviar tudo via POST
   const form = document.createElement("form");
   form.method = "POST";
-  form.action = "/bilheteria/?route=pagamento";
+  form.action = "/bilheteria/?url=pagamento";
+
 
   adicionarCampo(form, "tipo", tipo);
   adicionarCampo(form, "nome", nome);
@@ -58,7 +58,7 @@ function validarForm() {
   adicionarCampo(form, "email", email);
   adicionarCampo(form, "telefone", telefone);
 
-  // 👉 Tickets e validade (se existirem)
+  // 👉 Tickets e validade
   document.querySelectorAll("input[name^='quantities']").forEach(input => {
     adicionarCampo(form, input.name, input.value);
   });

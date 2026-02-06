@@ -3,7 +3,7 @@ namespace App\Controllers;
 
 class HomeController {
     public function index() {
-        require __DIR__ . '/../pages/home.php';
+        require __DIR__ . '/../pages/Home.php';
     }
 
     public function dados() {

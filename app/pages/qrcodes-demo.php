@@ -60,14 +60,14 @@ canvas{
 
 <script>
 const qrs = [
-  { code: "ABC123", desc: "Compra João Silva – 2 Inteiras + 1 Meia" },
-  { code: "XYZ456", desc: "Compra Maria Santos – 1 Inteira + 2 Meias" },
-  { code: "VIP777", desc: "Ingresso VIP – Acesso Total" },
-  { code: "FREE999", desc: "Isento – Cortesia" },
-  { code: "TEST2026", desc: "Evento Teste 2026" },
-  { code: "ING12345", desc: "Ingresso padrão" },
-  { code: "DEMO001", desc: "Simulação bilheteiro" },
-  { code: "DEMO002", desc: "Simulação admin" }
+  { code: "ABC123", desc: "João Silva – 2 Inteiras + 1 Meia" },
+  { code: "XYZ456", desc: "Maria Santos – 1 Inteira + 2 Meias" },
+  { code: "VIP777", desc: "Carlos VIP – Acesso Total" },
+  { code: "FREE999", desc: "Ana Cortesia – Isento" },
+  { code: "TEST2026", desc: "Evento Teste 2026 – 1 Inteira" },
+  { code: "ING12345", desc: "Paulo Rocha – 1 Inteira" },
+  { code: "DEMO001", desc: "Simulação Bilheteiro – 1 Meia" },
+  { code: "DEMO002", desc: "Simulação Admin – 2 Inteiras" }
 ];
 
 const container = document.getElementById("qrs");

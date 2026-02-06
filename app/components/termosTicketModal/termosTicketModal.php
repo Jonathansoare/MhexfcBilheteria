@@ -44,7 +44,7 @@
       <button type="button" class="modal-cancel" id="btnCancelar">
         <?= t('cancel') ?>
       </button>
-      <button type="button" class="modal-confirm" id="btnConfirmar" disabled onclick="enviarParaDadosPesson()">
+        <button type="button" class="modal-confirm" id="btnConfirmar" disabled onclick="enviarParaDadosPessoa()">
         <?= t('confirm') ?>
       </button>
 
